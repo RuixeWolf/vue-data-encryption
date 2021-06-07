@@ -1,12 +1,17 @@
 <template>
   <div class="container">
-    User Home
-    <el-button type="danger" plain @click="confirmLogout()">退出登录</el-button>
-    <el-button type="danger" plain @click="confirmCancellation()">注销账号</el-button>
     <nav>
-      <router-link :to="{ name: 'userInfo' }">用户信息</router-link> |
-      <router-link :to="{ name: 'editUserInfo' }">编辑用户信息</router-link> |
-      <router-link :to="{ name: 'modifyUserPassword' }">修改密码</router-link>
+      <el-menu :default-active="currentPath" mode="horizontal" router active-text-color="#409EFF">
+        <el-menu-item index="/user/info">用户信息</el-menu-item>
+        <el-menu-item index="/user/editinfo">编辑用户信息</el-menu-item>
+        <el-menu-item index="/user/modifypassword">修改密码</el-menu-item>
+        <!-- popper class 不能存在于使用 scoped 的 style 标签中 -->
+        <el-submenu index="more" popper-class="menu-more">
+          <template #title>更多</template>
+          <el-menu-item @click="confirmLogout()">退出登录</el-menu-item>
+          <el-menu-item @click="confirmCancellation()">注销账号</el-menu-item>
+        </el-submenu>
+      </el-menu>
     </nav>
     <router-view></router-view>
   </div>
@@ -33,7 +38,14 @@ export default defineComponent({
   },
 
   computed: {
-    ...mapState('user', ['logged'])
+    ...mapState('user', ['logged']),
+
+    /**
+     * 当前路由路径
+     */
+    currentPath () {
+      return this.$route.path
+    }
 
   },
 
@@ -79,7 +91,7 @@ export default defineComponent({
      * 打开确认注销账号弹窗
      */
     confirmCancellation () {
-      ElMessageBox.prompt('请输入密码', '账号注销', {
+      ElMessageBox.prompt('确认注销账号，请输入密码', '账号注销', {
         confirmButtonText: '确认注销',
         confirmButtonClass: 'el-button el-button--default el-button--small el-button--danger',
         cancelButtonText: '取消',
@@ -124,6 +136,11 @@ export default defineComponent({
 })
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
+  .menu-more {
+    ul {
+      min-width: 0;
+    }
+  }
 
 </style>
