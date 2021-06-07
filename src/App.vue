@@ -1,30 +1,51 @@
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
+  <div class="app-container">
+    <router-view></router-view>
   </div>
-  <router-view/>
 </template>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<script>
+import { defineComponent } from 'vue'
+import { mapState } from 'vuex'
+import routerAssist from '@/mixins/routerAssist'
 
-#nav {
-  padding: 30px;
+export default defineComponent({
+  name: 'App',
 
-  a {
-    font-weight: bold;
-    color: #2c3e50;
+  mixins: [
+    routerAssist
+  ],
 
-    &.router-link-exact-active {
-      color: #42b983;
+  computed: {
+    ...mapState('user', ['logged'])
+
+  },
+
+  created () {
+    // 在 App.vue 的 created 完成状态判断并直接跳转至目标页面，
+    // 增强用户体验，防止其它页面的内容一闪而过
+
+    // 未登录则转至登录页面
+    if (!this.logged) {
+      this.redirectTo({ name: 'userLogin' })
     }
   }
-}
+
+})
+</script>
+
+<style lang="scss">
+  /* App public style */
+
+  body {
+    margin: 0;
+    padding: 0;
+  }
+
+  #app {
+    font-family: Avenir, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
 </style>
