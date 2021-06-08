@@ -5,6 +5,7 @@
         <el-menu-item index="/user/info">用户信息</el-menu-item>
         <el-menu-item index="/user/editinfo">编辑用户信息</el-menu-item>
         <el-menu-item index="/user/modifypassword">修改密码</el-menu-item>
+        <el-menu-item index="/user/about">关于</el-menu-item>
         <!-- popper class 不能存在于使用 scoped 的 style 标签中 -->
         <el-submenu index="more" popper-class="menu-more">
           <template #title>更多</template>
