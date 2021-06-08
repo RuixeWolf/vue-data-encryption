@@ -114,11 +114,11 @@ export default defineComponent({
         const loginRes = await this.userLogin(loginData)
         // 登录成功
         ElMessage.success(loginRes)
-        this.loginNow = false
         this.redirectTo({ name: 'user' })
       } catch (error) {
         // 登录失败
         ElMessage.error(error)
+      } finally {
         this.loginNow = false
       }
     }

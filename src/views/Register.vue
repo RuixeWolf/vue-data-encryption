@@ -159,15 +159,16 @@ export default defineComponent({
       let registerRes
       try {
         registerRes = await userRegister(registerData)
-        if (!registerRes.success) {
-          // 注册失败
-          ElMessage.error(registerRes.message || '注册失败')
-          this.registering = false
-          return
-        }
       } catch (error) {
         // 请求失败
         ElMessage.error(error)
+        this.registering = false
+        return
+      }
+
+      if (!registerRes.success) {
+        // 注册失败
+        ElMessage.error(registerRes.message || '注册失败')
         this.registering = false
         return
       }
@@ -183,13 +184,13 @@ export default defineComponent({
         await this.userLogin(loginData)
         // 注册后登录成功
         ElMessage.success('注册成功')
-        this.registering = false
         this.redirectTo({ name: 'user' })
       } catch (error) {
         // 注册后登录失败
         ElMessage.success('注册成功，请登录')
-        this.registering = false
         this.redirectTo({ name: 'userLogin' })
+      } finally {
+        this.registering = false
       }
     }
 

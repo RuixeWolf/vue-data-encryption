@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <section class="user-info-container">
-      <el-descriptions title="用户信息" :column="2" border v-loading='loadingInfo'>
+      <el-descriptions title="用户信息" direction="vertical" :column="2" border v-loading='loadingInfo'>
         <template #extra>
           <el-button type="primary" plain size="small" icon="el-icon-edit" @click="navigateTo({ name: 'editUserInfo' })">编辑</el-button>
         </template>
@@ -60,7 +60,7 @@ export default defineComponent({
 
   methods: {
     /**
-     * 设置页面用户信息
+     * 获取并设置页面用户信息
      */
     async setUserInfo () {
       // 显示加载动画
@@ -73,7 +73,7 @@ export default defineComponent({
           this.userInfo = userInfoRes.data
           return
         }
-        ElMessage.error(userInfoRes.message)
+        ElMessage.error(userInfoRes.message || '获取用户信息失败')
       } catch (error) {
         ElMessage.error(error)
       } finally {
@@ -85,9 +85,10 @@ export default defineComponent({
     /**
      * 获取格式化的日期
      * @param {string} dateStr - 日期字符串
-     * @returns 格式化的日期
+     * @returns {string} 格式化的日期
      */
     formatedDate (dateStr) {
+      if (!dateStr) return ''
       const date = new Date(dateStr)
       return dateFormat(date, 'YYYY-mm-dd HH:MM:SS')
     }
@@ -99,7 +100,7 @@ export default defineComponent({
 <style lang="scss" scoped>
   .user-info-container {
     width: 80%;
-    margin: 30px auto;
+    margin: 50px auto;
   }
 
   @media screen and (max-width: 1000px) {
@@ -110,7 +111,9 @@ export default defineComponent({
 
   @media screen and (max-width: 800px) {
     .user-info-container {
-      width: 96%;
+      width: 100%;
+      box-sizing: border-box;
+      padding: 0 10px;
     }
   }
 
