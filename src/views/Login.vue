@@ -1,6 +1,7 @@
 <template>
   <div class="container">
     <section class="form-container">
+      <div class="form-title">用户登录</div>
       <el-form ref="loginForm" :model="loginFormData" :rules="loginFormRules" label-position="top">
         <el-form-item label="用户" prop="user">
           <el-input type="text" v-model="loginFormData.user" placeholder="用户名 / 账号"></el-input>
@@ -149,8 +150,31 @@ export default defineComponent({
     background-color: #fff;
     box-shadow: 0 0 10px 0 rgba($color: #000000, $alpha: 0.1);
 
+    .form-title {
+      width: 100%;
+      text-align: center;
+      font-size: 22px;
+      color: #409EFF;
+      margin-bottom: 10px;
+    }
+
     .form-btn {
       width: 100%;
+    }
+  }
+
+  @media screen and (max-width: 700px) {
+    .container {
+      position: static;
+      background-color: #fff;
+    }
+
+    .form-container {
+      position: static;
+      transform: translate(0, 0);;
+      width: 100%;
+      border-radius: 0;
+      box-shadow: none;
     }
   }
 </style>
