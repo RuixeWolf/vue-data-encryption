@@ -81,7 +81,7 @@ export function modifyPassword (passwordData) {
 /**
  * 用户账号注销 API
  * @param {{ password: string }} cancellationData
- * - 旧密码与新密码（密码使用 RSA 加密）
+ * - 账号密码（密码使用 RSA 加密）
  * @returns {Promise<Record<string, unknown>>}
  */
 export function accountCancellation (cancellationData) {

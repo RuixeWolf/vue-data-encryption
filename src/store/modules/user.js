@@ -20,6 +20,14 @@ const userModule = {
   mutations: {
     // 设置用户登录状态
     SET_LOGIN_STATUS: (state, loginStatus) => {
+      if (loginStatus) {
+        // 已登录
+        setStorageItem('logged', true)
+      } else {
+        // 已登出
+        removeStorageItem('authToken')
+        removeStorageItem('logged')
+      }
       state.logged = loginStatus
     }
 
@@ -31,9 +39,8 @@ const userModule = {
       return new Promise((resolve, reject) => {
         userApi.login(loginData).then(res => {
           if (res.success) {
-            // 登录成功
+            // 登录成功，保存请求 token
             setStorageItem('authToken', res.data.authToken)
-            setStorageItem('logged', true)
             commit('SET_LOGIN_STATUS', true)
             resolve(res.message || '登录成功')
           } else {
@@ -53,8 +60,6 @@ const userModule = {
         userApi.logout().then(res => {
           if (res.success) {
             // 退出登录成功
-            removeStorageItem('authToken')
-            removeStorageItem('logged')
             commit('SET_LOGIN_STATUS', false)
             resolve(res.message || '已退出登录')
           } else {
@@ -63,28 +68,6 @@ const userModule = {
         }).catch(err => {
           reject(err || '请求失败')
         })
-      })
-    },
-
-    // 用户账号注销
-    accountCancellation ({ commit }, cancellationData) {
-      return new Promise((resolve, reject) => {
-        userApi.accountCancellation(cancellationData)
-          .then(res => {
-            if (res.success) {
-              // 账号注销成功
-              removeStorageItem('authToken')
-              removeStorageItem('logged')
-              commit('SET_LOGIN_STATUS', false)
-              resolve(res.message || '账号已注销')
-            } else {
-              // 账号注销失败
-              reject(res.message || '账号注销失败')
-            }
-          }).catch(err => {
-            // 请求失败
-            reject(err || '请求失败')
-          })
       })
     }
 

@@ -20,10 +20,11 @@
 
 <script>
 import { defineComponent } from 'vue'
-import { mapState, mapActions } from 'vuex'
+import { mapState, mapActions, mapMutations } from 'vuex'
 import { ElMessageBox, ElMessage } from 'element-plus'
 import routerAssist from '@/mixins/routerAssist'
 import { rsaEncrypt } from '@/utils/rsaEncrypt'
+import { accountCancellation } from '@/apis/user'
 
 export default defineComponent({
   name: 'User',
@@ -60,8 +61,12 @@ export default defineComponent({
   methods: {
     // 引入 Vuex actions
     ...mapActions('user', {
-      userLogout: 'logout',
-      accountCancellation: 'accountCancellation'
+      userLogout: 'logout'
+    }),
+
+    // 引入 Vuex mutations
+    ...mapMutations('user', {
+      setLoginStatus: 'SET_LOGIN_STATUS'
     }),
 
     /**
@@ -121,16 +126,28 @@ export default defineComponent({
         return
       }
 
-      // 生成注销数据
+      // 生成账号注销数据
       const cancellationData = { password }
 
       // 发起账号注销请求
+      let cancellationRes
       try {
-        const cancellationRes = await this.accountCancellation(cancellationData)
-        ElMessage.success(cancellationRes)
-        this.redirectTo({ name: 'userLogin' })
+        cancellationRes = await accountCancellation(cancellationData)
       } catch (error) {
+        // 请求失败
         ElMessage.error(error)
+        return
+      }
+
+      // 判断注销结果
+      if (cancellationRes && cancellationRes.success) {
+        // 账号注销成功
+        this.setLoginStatus(false)
+        ElMessage.success(cancellationRes.message || '账号已注销')
+        this.redirectTo({ name: 'userLogin' })
+      } else {
+        // 账号注销失败
+        ElMessage.error(cancellationRes.message || '账号注销失败')
       }
     }
   }
