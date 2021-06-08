@@ -38,7 +38,7 @@ const routes = [
 
       /**
        * 编辑用户信息页面
-       * $route /user/info
+       * $route /user/editinfo
        * @access private
        */
       {
@@ -49,7 +49,7 @@ const routes = [
 
       /**
        * 修改密码页面
-       * $route /user/info
+       * $route /user/modifypassword
        * @access private
        */
       {
@@ -60,7 +60,7 @@ const routes = [
 
       /**
        * 关于页面
-       * $route /user/info
+       * $route /user/about
        * @access private
        */
       {
@@ -73,7 +73,7 @@ const routes = [
 
   /**
    * 用户登录页面
-   * $route /user/info
+   * $route /login
    * @access public
    */
   {
@@ -84,7 +84,7 @@ const routes = [
 
   /**
    * 用户注册页面
-   * $route /user/info
+   * $route /register
    * @access public
    */
   {
