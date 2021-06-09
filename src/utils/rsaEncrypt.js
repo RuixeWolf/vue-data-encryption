@@ -1,5 +1,6 @@
 import JSEncrypt from 'jsencrypt'
 import { getPubKey } from '@/apis/key'
+import { getSessionItem, setSessionItem } from '@/utils/webStorage'
 
 /**
  * RSA 加密
@@ -7,17 +8,21 @@ import { getPubKey } from '@/apis/key'
  * @returns {Promise<string>} 加密结果（Base64 编码）
  */
 export async function rsaEncrypt (str) {
-  let pubKey
+  // 从 sessionStorage 获取 RSA 公钥
+  let pubKey = getSessionItem('pubKey') || ''
 
-  // 获取 RSA 公钥
-  try {
-    const pubKeyRes = await getPubKey()
-    if (!pubKeyRes.success) {
-      return Promise.reject('RSA 公钥获取失败')
+  // 从服务端获取 RSA 公钥
+  if (!pubKey) {
+    try {
+      const pubKeyRes = await getPubKey()
+      if (!pubKeyRes.success) {
+        return Promise.reject('公钥获取失败')
+      }
+      pubKey = pubKeyRes.data.pubKey
+      setSessionItem('pubKey', pubKeyRes.data.pubKey)
+    } catch (error) {
+      return Promise.reject(error)
     }
-    pubKey = pubKeyRes.data.pubKey
-  } catch (error) {
-    return Promise.reject(error)
   }
 
   // 加密数据
