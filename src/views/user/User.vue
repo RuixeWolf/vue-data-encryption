@@ -1,19 +1,21 @@
 <template>
   <div class="container">
-    <nav>
-      <el-menu :default-active="currentPath" mode="horizontal" router active-text-color="#409EFF">
-        <el-menu-item index="/user/info">用户信息</el-menu-item>
-        <el-menu-item index="/user/editinfo">编辑用户信息</el-menu-item>
-        <el-menu-item index="/user/modifypassword">修改密码</el-menu-item>
-        <el-menu-item index="/user/about">关于</el-menu-item>
-        <!-- popper class 不能存在于使用 scoped 的 style 标签中 -->
-        <el-submenu index="more" popper-class="menu-more">
-          <template #title>更多</template>
-          <el-menu-item @click="confirmLogout()">退出登录</el-menu-item>
-          <el-menu-item @click="confirmCancellation()">注销账号</el-menu-item>
-        </el-submenu>
-      </el-menu>
-    </nav>
+    <el-affix position="top">
+      <nav>
+        <el-menu :default-active="currentPath" mode="horizontal" router active-text-color="#409EFF">
+          <el-menu-item index="/user/info">用户信息</el-menu-item>
+          <el-menu-item index="/user/editinfo">编辑用户信息</el-menu-item>
+          <el-menu-item index="/user/modifypassword">修改密码</el-menu-item>
+          <el-menu-item index="/user/about">关于</el-menu-item>
+          <!-- popper class 不能存在于使用 scoped 的 style 标签中 -->
+          <el-submenu index="more" popper-class="menu-more">
+            <template #title>更多</template>
+            <el-menu-item @click="confirmLogout()">退出登录</el-menu-item>
+            <el-menu-item @click="confirmCancellation()">注销账号</el-menu-item>
+          </el-submenu>
+        </el-menu>
+        </nav>
+    </el-affix>
     <router-view></router-view>
   </div>
 </template>
