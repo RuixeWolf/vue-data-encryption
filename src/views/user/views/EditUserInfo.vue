@@ -14,10 +14,10 @@
         <el-form-item label=" ">
           <el-row :gutter="10">
             <el-col :span="12">
-              <el-button class="form-btn" type="primary" plain @click="confirmModify()" :loading="editing">修改信息</el-button>
+              <el-button class="form-btn" type="primary" plain @click="confirmModify()" :loading="editing" :disabled="formUnchanged">修改信息</el-button>
             </el-col>
             <el-col :span="12">
-              <el-button class="form-btn" type="info" plain @click="setFormData()">重置信息</el-button>
+              <el-button class="form-btn" type="info" plain @click="resetFormData()" :disabled="formUnchanged">重置信息</el-button>
             </el-col>
           </el-row>
         </el-form-item>
@@ -31,6 +31,7 @@ import { defineComponent } from 'vue'
 import { ElMessageBox, ElMessage } from 'element-plus'
 import validateForm from '@/mixins/validateForm'
 import { getInfo, editInfo } from '@/apis/user'
+import { compareRecord } from '@/utils/equals'
 
 export default defineComponent({
   name: 'EditUserInfo',
@@ -49,6 +50,14 @@ export default defineComponent({
     }
 
     return {
+      // 原始表单数据
+      originalFormData: {
+        nickName: '',
+        avatar: '',
+        email: '',
+        phone: ''
+      },
+
       // 编辑用户信息表单数据
       editInfoFormData: {
         nickName: '',
@@ -75,8 +84,19 @@ export default defineComponent({
     }
   },
 
+  computed: {
+    /**
+     * 表单数据未被改变
+     * @returns {boolean} 表单数据是否未改变
+     */
+    formUnchanged () {
+      return compareRecord(this.editInfoFormData, this.originalFormData)
+    }
+
+  },
+
   created () {
-    // 初始胡表单数据
+    // 初始化表单数据
     this.setFormData()
   },
 
@@ -116,8 +136,17 @@ export default defineComponent({
       }
 
       // 设置页面表单数据
-      this.editInfoFormData = formData
+      this.originalFormData = { ...formData }
+      this.editInfoFormData = { ...formData }
       this.loadingInfo = false
+    },
+
+    /**
+     * 重置表单数据
+     */
+    resetFormData () {
+      this.editInfoFormData = { ...this.originalFormData }
+      this.$refs['editUserInfo'].clearValidate()
     },
 
     /**
