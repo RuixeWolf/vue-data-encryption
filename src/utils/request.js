@@ -22,9 +22,8 @@ service.interceptors.request.use(
   },
 
   // onRejected
-  error => {
+  () => {
     console.error('Error in Axios request.')
-    console.error(error)
     return Promise.reject('请求失败，请检查网络连接')
   }
 )
@@ -40,20 +39,24 @@ service.interceptors.response.use(
 
   // onRejected
   error => {
-    // 获取状态码
+    // ERR_INTERNET_DISCONNECTED
+    if (!error.response) {
+      console.error('Error in Axios response.')
+      return Promise.reject('请求失败，请检查网络连接')
+    }
+
+    // 获取状态码与响应数据
     const statusCode = error.response.data.statusCode
+    const res = error.response.data
 
     // 处理 token 异常
     if ([10000, 10001, 10002, 10003].includes(statusCode)) {
       // Token 失效，清除登录信息并转至用户登录页面
       vueStore.commit('user/SET_LOGIN_STATUS', false)
       vueRouter.replace({ name: 'userLogin' })
-      console.error(error.response.data.message)
+      console.error('Error:', res.message)
       return Promise.reject('登录信息失效，请重新登录')
     }
-
-    console.error('Error in Axios response.')
-    return Promise.reject('请求失败，请检查网络连接')
   }
 )
 
