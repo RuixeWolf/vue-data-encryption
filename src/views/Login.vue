@@ -55,7 +55,7 @@ export default defineComponent({
         ],
         password: [
           { required: true, message: '请输入密码', trigger: 'blur' },
-          { min: 6, message: '密码格式有误', trigger: 'blur' }
+          { min: 6, message: '密码不应少于 6 位', trigger: 'blur' }
         ]
       },
 
