@@ -108,7 +108,7 @@ export default defineComponent({
         oldPassword = await rsaEncrypt(oldPassword)
         newPassword = await rsaEncrypt(newPassword)
       } catch (error) {
-        ElMessage.error(error)
+        ElMessage.error(error.message)
         this.submitting = false
         return
       }
@@ -121,7 +121,7 @@ export default defineComponent({
       try {
         modifyPasswordRes = await modifyPassword(modifyPasswordData)
       } catch (error) {
-        ElMessage.error(error)
+        ElMessage.error(error.message)
         this.submitting = false
         return
       }

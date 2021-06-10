@@ -45,11 +45,11 @@ const userModule = {
             resolve(res.message || '登录成功')
           } else {
             // 登录失败
-            reject(res.message || '登录失败')
+            reject(new Error(res.message || '登录失败'))
           }
         }).catch(err => {
           // 请求失败
-          reject(err || '请求失败')
+          reject(err || new Error('请求失败'))
         })
       })
     },
@@ -63,10 +63,10 @@ const userModule = {
             commit('SET_LOGIN_STATUS', false)
             resolve(res.message || '已退出登录')
           } else {
-            reject(res.message || '退出登录失败')
+            reject(new Error(res.message || '退出登录失败'))
           }
         }).catch(err => {
-          reject(err || '请求失败')
+          reject(err || new Error('请求失败'))
         })
       })
     }

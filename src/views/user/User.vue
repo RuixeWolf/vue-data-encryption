@@ -91,7 +91,7 @@ export default defineComponent({
         ElMessage.success(logoutRes)
         this.redirectTo({ name: 'userLogin' })
       } catch (error) {
-        ElMessage.error(error)
+        ElMessage.error(error.message)
       }
     },
 
@@ -124,7 +124,7 @@ export default defineComponent({
         password = await rsaEncrypt(password)
       } catch (error) {
         // 加密失败
-        ElMessage.error(error)
+        ElMessage.error(error.message)
         return
       }
 
@@ -137,7 +137,7 @@ export default defineComponent({
         cancellationRes = await accountCancellation(cancellationData)
       } catch (error) {
         // 请求失败
-        ElMessage.error(error)
+        ElMessage.error(error.message)
         return
       }
 

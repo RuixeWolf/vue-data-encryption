@@ -75,7 +75,7 @@ export default defineComponent({
         }
         ElMessage.error(userInfoRes.message || '获取用户信息失败')
       } catch (error) {
-        ElMessage.error(error)
+        ElMessage.error(error.message)
       } finally {
         // 关闭加载动画
         this.loadingInfo = false

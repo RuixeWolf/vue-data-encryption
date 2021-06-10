@@ -150,7 +150,7 @@ export default defineComponent({
         registerData.password = await rsaEncrypt(registerData.password)
       } catch (error) {
         // 加密失败
-        ElMessage.error(error)
+        ElMessage.error(error.message)
         this.registering = false
         return
       }
@@ -161,7 +161,7 @@ export default defineComponent({
         registerRes = await userRegister(registerData)
       } catch (error) {
         // 请求失败
-        ElMessage.error(error)
+        ElMessage.error(error.message)
         this.registering = false
         return
       }

@@ -104,7 +104,7 @@ export default defineComponent({
         loginData.password = await rsaEncrypt(loginData.password)
       } catch (error) {
         // 加密失败
-        ElMessage.error(error)
+        ElMessage.error(error.message)
         this.loginNow = false
         return
       }
@@ -117,7 +117,7 @@ export default defineComponent({
         this.redirectTo({ name: 'user' })
       } catch (error) {
         // 登录失败
-        ElMessage.error(error)
+        ElMessage.error(error.message)
       } finally {
         this.loginNow = false
       }

@@ -16,7 +16,7 @@ export async function rsaEncrypt (str) {
     try {
       const pubKeyRes = await getPubKey()
       if (!pubKeyRes.success) {
-        return Promise.reject('公钥获取失败')
+        return Promise.reject(new Error('公钥获取失败'))
       }
       pubKey = pubKeyRes.data.pubKey
       setSessionItem('pubKey', pubKeyRes.data.pubKey)
@@ -30,7 +30,7 @@ export async function rsaEncrypt (str) {
   crypt.setPublicKey(pubKey)
   const encryptRes = crypt.encrypt(str)
   if (!encryptRes) {
-    return Promise.reject('数据加密失败')
+    return Promise.reject(new Error('数据加密失败'))
   }
   return encryptRes
 }

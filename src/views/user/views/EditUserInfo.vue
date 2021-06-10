@@ -121,7 +121,7 @@ export default defineComponent({
           userInfo = userInfoRes.data
         } catch (error) {
         // 请求失败
-          ElMessage.error(error)
+          ElMessage.error(error.message)
           this.loadingInfo = false
           return
         }
@@ -179,7 +179,7 @@ export default defineComponent({
         editUserInfoRes = await editInfo(editUserInfoReq)
       } catch (error) {
         // 请求失败
-        ElMessage.error(error)
+        ElMessage.error(error.message)
         this.editing = false
         return
       }
@@ -191,7 +191,7 @@ export default defineComponent({
         this.setFormData(editUserInfoRes.data)
       } else {
         // 修改失败
-        ElMessage.error(editUserInfoRes.success || '用户信息修改失败')
+        ElMessage.error(editUserInfoRes.message || '用户信息修改失败')
       }
 
       // 修改用户信息结束

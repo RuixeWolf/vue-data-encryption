@@ -24,7 +24,7 @@ service.interceptors.request.use(
   // onRejected
   () => {
     console.error('XHR Error in Axios Request')
-    return Promise.reject('请求失败，请检查网络连接')
+    return Promise.reject(new Error('请求失败，请检查网络连接'))
   }
 )
 
@@ -42,7 +42,7 @@ service.interceptors.response.use(
     // ERR_INTERNET_DISCONNECTED
     if (!error.response) {
       console.error('XHR Error: Internet Disconnected')
-      return Promise.reject('请求失败，请检查网络连接')
+      return Promise.reject(new Error('请求失败，请检查网络连接'))
     }
 
     // 获取 HTTP 状态
@@ -52,7 +52,7 @@ service.interceptors.response.use(
     // 处理服务器异常 HTTP 5XX
     if (/^5\d{2}$/.test(status)) {
       console.error(`XHR Error: ${statusText}`)
-      return Promise.reject('无法处理请求，请稍后再试')
+      return Promise.reject(new Error('无法处理请求，请稍后再试'))
     }
 
     // 获取响应数据与数据状态码（非 HTTP 状态码）
@@ -65,12 +65,12 @@ service.interceptors.response.use(
       vueStore.commit('user/SET_LOGIN_STATUS', false)
       vueRouter.replace({ name: 'userLogin' })
       console.error('XHR Error:', res.message)
-      return Promise.reject('登录信息失效，请重新登录')
+      return Promise.reject(new Error('登录信息失效，请重新登录'))
     }
 
     // Default case
     console.error('XHR Error in Axios Response')
-    return Promise.reject('请求失败，请稍后再试')
+    return Promise.reject(new Error('请求失败，请稍后再试'))
   }
 )
 
