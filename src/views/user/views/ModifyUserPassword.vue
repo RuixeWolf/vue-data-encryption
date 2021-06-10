@@ -3,13 +3,13 @@
     <section class="modify-password-container">
       <el-form ref="modifyPasswordForm" label-position="top" :model="modifyPasswordFormData" :rules="modifyPasswordFormRules">
         <el-form-item label="旧密码" prop="oldPaswword">
-          <el-input type="password" v-model="modifyPasswordFormData.oldPaswword"></el-input>
+          <el-input type="password" v-model="modifyPasswordFormData.oldPaswword" placeholder="旧密码"></el-input>
         </el-form-item>
         <el-form-item label="新密码" prop="newPassword">
-          <el-input type="password" v-model="modifyPasswordFormData.newPassword"></el-input>
+          <el-input type="password" v-model="modifyPasswordFormData.newPassword" placeholder="新密码"></el-input>
         </el-form-item>
         <el-form-item label="确认新密码" prop="confirmedNewPassword">
-          <el-input type="password" v-model="modifyPasswordFormData.confirmedNewPassword"></el-input>
+          <el-input type="password" v-model="modifyPasswordFormData.confirmedNewPassword" placeholder="再次输入新密码"></el-input>
         </el-form-item>
         <el-form-item label=" ">
           <el-button class="form-btn" type="primary" plain @click="confirmModifyPassword()" :loading="submitting">修改密码</el-button>
@@ -154,11 +154,12 @@ export default defineComponent({
     }
   }
 
-  @media screen and (max-width: 520px) {
+  @media screen and (max-width: 540px) {
     .modify-password-container {
       width: 100%;
       box-sizing: border-box;
-      padding: 0 10px;
+      padding: 0 20px;
+      margin: 20px auto;
     }
   }
 </style>

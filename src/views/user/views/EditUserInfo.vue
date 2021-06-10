@@ -3,21 +3,21 @@
     <section class="edit-info-container">
       <el-form ref="editUserInfo" label-position="top" :model="editInfoFormData" :rules="editInfoFormRules" v-loading="loadingInfo">
         <el-form-item label="昵称" prop="nickName">
-          <el-input type="text" v-model="editInfoFormData.nickName"></el-input>
+          <el-input type="text" v-model="editInfoFormData.nickName" placeholder="昵称"></el-input>
         </el-form-item>
         <el-form-item label="邮箱" prop="email">
-          <el-input type="email" v-model="editInfoFormData.email"></el-input>
+          <el-input type="email" v-model="editInfoFormData.email" placeholder="邮箱"></el-input>
         </el-form-item>
         <el-form-item label="手机号" prop="phone">
-          <el-input type="tel" v-model="editInfoFormData.phone"></el-input>
+          <el-input type="tel" v-model="editInfoFormData.phone" placeholder="手机号"></el-input>
         </el-form-item>
         <el-form-item label=" ">
           <el-row :gutter="10">
             <el-col :span="12">
-              <el-button class="form-btn" type="primary" plain @click="confirmModify()" :loading="editing" :disabled="formUnchanged">修改信息</el-button>
+              <el-button class="form-btn" type="info" plain @click="resetFormData()" :disabled="formUnchanged">重置信息</el-button>
             </el-col>
             <el-col :span="12">
-              <el-button class="form-btn" type="info" plain @click="resetFormData()" :disabled="formUnchanged">重置信息</el-button>
+              <el-button class="form-btn" type="primary" plain @click="confirmModify()" :loading="editing" :disabled="formUnchanged">修改信息</el-button>
             </el-col>
           </el-row>
         </el-form-item>
@@ -212,11 +212,12 @@ export default defineComponent({
     }
   }
 
-  @media screen and (max-width: 520px) {
+  @media screen and (max-width: 540px) {
     .edit-info-container {
       width: 100%;
       box-sizing: border-box;
-      padding: 0 10px;
+      padding: 0 20px;
+      margin: 20px auto;
     }
   }
 </style>

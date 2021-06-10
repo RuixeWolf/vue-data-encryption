@@ -1,5 +1,6 @@
 <template>
   <div class="app-container">
+    <!-- 子页面内容 -->
     <router-view></router-view>
   </div>
 </template>

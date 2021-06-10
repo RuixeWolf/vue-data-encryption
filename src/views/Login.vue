@@ -12,10 +12,10 @@
         <el-form-item label=" ">
           <el-row :gutter="10">
             <el-col :span="12">
-              <el-button class="form-btn" type="primary" plain :loading="loginNow" @click="hanndleLogin()">登录</el-button>
+              <el-button class="form-btn" type="info" plain @click="navigateTo({ name: 'userRegister' })">注册</el-button>
             </el-col>
             <el-col :span="12">
-              <el-button class="form-btn" type="info" plain @click="navigateTo({ name: 'userRegister' })">注册</el-button>
+              <el-button class="form-btn" type="primary" plain :loading="loginNow" @click="hanndleLogin()">登录</el-button>
             </el-col>
           </el-row>
         </el-form-item>
@@ -167,6 +167,7 @@ export default defineComponent({
     .container {
       position: static;
       background-color: #fff;
+      margin-top: 10px;
     }
 
     .form-container {

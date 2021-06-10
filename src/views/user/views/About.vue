@@ -9,14 +9,16 @@
       <div class="about-info">
         <div class="about-info-label">项目描述</div>
         <div class="about-info-content">
-          基于常用的用户操作场景所开发的单页面应用与后端服务
+          基于常用的用户操作场景所开发的后端服务与前端单页面应用
         </div>
       </div>
       <div class="about-info">
         <div class="about-info-label">主要功能</div>
-        <div class="about-info-content">非对称加密传输时的重点数据</div>
+        <div class="about-info-content">非对称加密传输时的重点数据（如：密码）</div>
         <div class="about-info-content">单向加密储存时的重点数据</div>
-        <div class="about-info-content">使用 Token 验证客户端会话状态</div>
+        <div class="about-info-content">使用 Token 验证客户端的会话状态</div>
+        <div class="about-info-content">Token 有时限，客户端访问时自动续约</div>
+        <div class="about-info-content">限制同一用户同时登录的客户端数量</div>
       </div>
     </div>
 
@@ -43,7 +45,7 @@
       <div class="about-info">
         <div class="about-info-label">主要开发库</div>
         <div class="about-info-content">Mongoose —— 提供 MongoDB Model</div>
-        <div class="about-info-content">Node-RSA —— 服务端使用 RSA 加密与解密数据</div>
+        <div class="about-info-content">Node-RSA —— 使用 RSA 加密与解密重点数据</div>
         <div class="about-info-content">Crypto-JS —— 重点数据加密</div>
       </div>
     </div>
@@ -53,7 +55,7 @@
       <div class="about-info">
         <div class="about-info-label">项目描述</div>
         <div class="about-info-content">
-          基于 Vue 开发的前端单页面应用
+          基于 Vue 框架开发的前端单页面应用
         </div>
       </div>
       <div class="about-info">
@@ -83,6 +85,9 @@
       </div>
     </div>
 
+    <!-- 回到顶部按钮 -->
+    <el-backtop></el-backtop>
+
   </div>
 </template>
 
@@ -91,22 +96,29 @@ import { defineComponent } from 'vue'
 
 export default defineComponent({
   name: 'About'
+
 })
 </script>
 
 <style lang="scss" scoped>
 .container {
-  margin: 30px auto 50px auto;
+  margin: 20px auto 70px auto;
   width: 900px;
   font-size: 18px;
   color: #2c3e50;
 }
 
-@media screen and (max-width: 940px) {
+@media screen and (max-width: 960px) {
   .container {
     width: 100%;
     box-sizing: border-box;
-    padding: 0 10px;
+    padding: 0 20px;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .container {
+    margin-top: 10px;
   }
 }
 

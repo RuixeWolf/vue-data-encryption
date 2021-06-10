@@ -1,7 +1,9 @@
 <template>
   <div class="container">
+    <!-- 顶部导航栏 -->
     <el-affix position="top">
-      <nav>
+      <!-- PC 端导航栏 -->
+      <nav class="nav-pc">
         <el-menu :default-active="currentPath" mode="horizontal" router active-text-color="#409EFF">
           <el-menu-item index="/user/info">用户信息</el-menu-item>
           <el-menu-item index="/user/editinfo">编辑用户信息</el-menu-item>
@@ -14,8 +16,46 @@
             <el-menu-item @click="confirmCancellation()">注销账号</el-menu-item>
           </el-submenu>
         </el-menu>
-        </nav>
+      </nav>
+
+      <!-- 移动端导航栏 -->
+      <nav class="nav-phone">
+        <!-- 移动端页面 header -->
+        <div class="nav-phone-header">
+          <i class="el-icon-s-unfold nav-phone-header-btn" @click="switchDrawerNav(true)"></i>
+          <div class="nav-phone-header-title">{{ pageTitle }}</div>
+        </div>
+
+        <!-- 导航菜单 drawer -->
+        <el-drawer
+          v-model="drawerNav"
+          direction="ltr"
+          size="60%"
+          title="导航">
+          <div class="nav-phone-drawer">
+            <!-- 导航菜单 -->
+            <el-menu
+              :default-active="currentPath"
+              mode="vertical"
+              router
+              active-text-color="#409EFF"
+              @select="switchDrawerNav(false)">
+              <el-menu-item index="/user/info">用户信息</el-menu-item>
+              <el-menu-item index="/user/editinfo">编辑用户信息</el-menu-item>
+              <el-menu-item index="/user/modifypassword">修改密码</el-menu-item>
+              <el-menu-item index="/user/about">关于</el-menu-item>
+              <el-submenu index="more">
+                <template #title>更多</template>
+                <el-menu-item @click="confirmLogout()">退出登录</el-menu-item>
+                <el-menu-item @click="confirmCancellation()">注销账号</el-menu-item>
+              </el-submenu>
+            </el-menu>
+          </div>
+        </el-drawer>
+      </nav>
     </el-affix>
+
+    <!-- 子页面内容 -->
     <router-view></router-view>
   </div>
 </template>
@@ -37,6 +77,8 @@ export default defineComponent({
 
   data () {
     return {
+      // 是否打开移动端导航栏 drawer
+      drawerNav: false
 
     }
   },
@@ -49,6 +91,13 @@ export default defineComponent({
      */
     currentPath () {
       return this.$route.path
+    },
+
+    /**
+     * 当前页面名称
+     */
+    pageTitle () {
+      return this.$route.meta.title
     }
 
   },
@@ -104,6 +153,7 @@ export default defineComponent({
         confirmButtonClass: 'el-button el-button--default el-button--small el-button--danger',
         cancelButtonText: '取消',
         inputType: 'password',
+        inputPlaceholder: '密码',
         inputValidator: value => {
           if (!value) return '密码不能为空'
           if (value.length < 6) return '密码不应少于 6 位'
@@ -151,7 +201,16 @@ export default defineComponent({
         // 账号注销失败
         ElMessage.error(cancellationRes.message || '账号注销失败')
       }
+    },
+
+    /**
+     * 切换移动端导航栏状态
+     * @param {boolean} status - 打开或关闭移动端导航栏
+     */
+    switchDrawerNav (status) {
+      this.drawerNav = status
     }
+
   }
 })
 </script>
@@ -160,6 +219,52 @@ export default defineComponent({
   .menu-more {
     ul {
       min-width: 0;
+    }
+  }
+
+  .nav-pc {
+    display: block;
+  }
+
+  .nav-phone {
+    display: none;
+    background-color: #fff;
+
+    &-header {
+      width: 100%;
+      height: 60px;
+      box-sizing: border-box;
+      padding: 0 10px;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: solid 1px #e6e6e6;
+      position: relative;
+
+      &-btn {
+        font-size: 30px;
+        color: #606266;
+      }
+
+      &-title {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: #409EFF;
+        font-size: 18px;
+      }
+    }
+  }
+
+  @media screen and (max-width: 700px) {
+    .nav-pc {
+      display: none;
+    }
+
+    .nav-phone {
+      display: block;
     }
   }
 

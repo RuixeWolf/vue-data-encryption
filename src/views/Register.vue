@@ -10,7 +10,7 @@
           <el-input type="password" v-model="registerFormData.password" placeholder="密码"></el-input>
         </el-form-item>
         <el-form-item label="确认密码" prop="confirmedPassword">
-          <el-input type="password" v-model="registerFormData.confirmedPassword" placeholder="确认密码"></el-input>
+          <el-input type="password" v-model="registerFormData.confirmedPassword" placeholder="再次输入密码"></el-input>
         </el-form-item>
         <el-form-item label="昵称" prop="nickName">
           <el-input type="text" v-model="registerFormData.nickName" placeholder="昵称"></el-input>
@@ -24,10 +24,10 @@
         <el-form-item label=" ">
           <el-row :gutter="10">
             <el-col :span="12">
-              <el-button class="form-btn" type="primary" plain :loading="registering" @click="hanndleRegister()">注册</el-button>
+              <el-button class="form-btn" type="info" plain @click="navigateTo({ name: 'userLogin' })">登录</el-button>
             </el-col>
             <el-col :span="12">
-              <el-button class="form-btn" type="info" plain @click="navigateTo({ name: 'userLogin' })">登录</el-button>
+              <el-button class="form-btn" type="primary" plain :loading="registering" @click="hanndleRegister()">注册</el-button>
             </el-col>
           </el-row>
         </el-form-item>
@@ -237,6 +237,7 @@ export default defineComponent({
     .container {
       position: static;
       background-color: #fff;
+      margin-top: 10px;
     }
 
     .form-container {

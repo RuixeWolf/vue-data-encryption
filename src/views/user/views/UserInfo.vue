@@ -106,14 +106,16 @@ export default defineComponent({
   @media screen and (max-width: 1000px) {
     .user-info-container {
       width: 90%;
+      margin: 30px auto;
     }
   }
 
-  @media screen and (max-width: 800px) {
+  @media screen and (max-width: 700px) {
     .user-info-container {
       width: 100%;
       box-sizing: border-box;
-      padding: 0 10px;
+      padding: 0 20px;
+      margin: 20px auto;
     }
   }
 
