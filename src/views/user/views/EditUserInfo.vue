@@ -3,13 +3,13 @@
     <section class="edit-info-container">
       <el-form ref="editUserInfo" label-position="top" :model="editInfoFormData" :rules="editInfoFormRules" v-loading="loadingInfo">
         <el-form-item label="昵称" prop="nickName">
-          <el-input v-model="editInfoFormData.nickName"></el-input>
+          <el-input type="text" v-model="editInfoFormData.nickName"></el-input>
         </el-form-item>
         <el-form-item label="邮箱" prop="email">
-          <el-input v-model="editInfoFormData.email"></el-input>
+          <el-input type="email" v-model="editInfoFormData.email"></el-input>
         </el-form-item>
         <el-form-item label="手机号" prop="phone">
-          <el-input v-model="editInfoFormData.phone"></el-input>
+          <el-input type="tel" v-model="editInfoFormData.phone"></el-input>
         </el-form-item>
         <el-form-item label=" ">
           <el-row :gutter="10">

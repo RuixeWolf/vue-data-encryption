@@ -16,10 +16,10 @@
           <el-input type="text" v-model="registerFormData.nickName" placeholder="昵称"></el-input>
         </el-form-item>
         <el-form-item label="邮箱" prop="email">
-          <el-input type="text" v-model="registerFormData.email" placeholder="邮箱"></el-input>
+          <el-input type="email" v-model="registerFormData.email" placeholder="邮箱"></el-input>
         </el-form-item>
         <el-form-item label="手机号" prop="phone">
-          <el-input type="text" v-model="registerFormData.phone" placeholder="手机号"></el-input>
+          <el-input type="tel" v-model="registerFormData.phone" placeholder="手机号"></el-input>
         </el-form-item>
         <el-form-item label=" ">
           <el-row :gutter="10">
