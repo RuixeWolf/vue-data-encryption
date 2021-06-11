@@ -9,7 +9,7 @@
       <div class="about-info">
         <div class="about-info-label">项目描述</div>
         <div class="about-info-content">
-          基于常用的用户操作场景所开发的后端服务与前端单页面应用
+          基于常用的用户操作场景所涉及的重点数据加密而开发的后端服务与前端单页面应用
         </div>
       </div>
       <div class="about-info">

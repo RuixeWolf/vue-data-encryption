@@ -7,7 +7,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 const routes = [
   /**
    * 根路径（跳转至用户相关页面）
-   * $route /
+   * Path: /
    * @access public
    */
   {
@@ -17,7 +17,7 @@ const routes = [
 
   /**
    * 用户相关页面（跳转至用户信息页面）
-   * $route /user
+   * Path: /user
    * @access private
    */
   {
@@ -31,7 +31,7 @@ const routes = [
     children: [
       /**
        * 用户信息页面
-       * $route /user/info
+       * Path: /user/info
        * @access private
        */
       {
@@ -45,7 +45,7 @@ const routes = [
 
       /**
        * 编辑用户信息页面
-       * $route /user/editinfo
+       * Path: /user/editinfo
        * @access private
        */
       {
@@ -59,7 +59,7 @@ const routes = [
 
       /**
        * 修改密码页面
-       * $route /user/modifypassword
+       * Path: /user/modifypassword
        * @access private
        */
       {
@@ -73,7 +73,7 @@ const routes = [
 
       /**
        * 关于页面
-       * $route /user/about
+       * Path: /user/about
        * @access private
        */
       {
@@ -89,7 +89,7 @@ const routes = [
 
   /**
    * 用户登录页面
-   * $route /login
+   * Path: /login
    * @access public
    */
   {
@@ -103,7 +103,7 @@ const routes = [
 
   /**
    * 用户注册页面
-   * $route /register
+   * Path: /register
    * @access public
    */
   {
@@ -113,7 +113,24 @@ const routes = [
     meta: {
       title: '注册'
     }
-  }
+  },
+
+  /**
+   * 404 页面
+   * Path: /404
+   * @access public
+   */
+  {
+    path: '/404',
+    name: 'notFound',
+    component: () => import('@/views/Page404.vue'),
+    meta: {
+      title: '404 Not Found'
+    }
+  },
+
+  // 重定向至 404 页面
+  { path: '/:pathMatch(.*)*', redirect: { name: 'notFound' } }
 
 ]
 
