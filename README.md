@@ -1,6 +1,12 @@
-# data-encryption-frontend
+# Vue Data Encryption
+
+## Backend project
+
+- [GitHub](https://github.com/RuixeWolf/express-data-encryption)
+- [Gitee](https://gitee.com/RuixeWolf/express-data-encryption)
 
 ## Project setup
+
 ```
 npm install
 ```
