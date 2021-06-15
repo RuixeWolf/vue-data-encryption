@@ -1,5 +1,5 @@
 {
-  "name": "data-encryption-frontend",
+  "name": "vue-data-encryption",
   "version": "0.1.0",
   "private": true,
   "scripts": {
