@@ -48,6 +48,13 @@
         <div class="about-info-content">Node-RSA —— 使用 RSA 加密与解密重点数据</div>
         <div class="about-info-content">Crypto-JS —— 重点数据加密</div>
       </div>
+      <div class="about-info">
+        <div class="about-info-label">项目仓库</div>
+        <div class="about-info-content">
+          <a class="about-info-content-link" href="https://github.com/RuixeWolf/express-data-encryption">GitHub</a> |
+          <a class="about-info-content-link" href="https://gitee.com/RuixeWolf/express-data-encryption">Gitee</a>
+        </div>
+      </div>
     </div>
 
     <div class="about">
@@ -70,13 +77,20 @@
         <div class="about-info-content">Axios —— XHR 前后端数据交互</div>
         <div class="about-info-content">JSEncrypt —— 传输时重点数据加密</div>
       </div>
+      <div class="about-info">
+        <div class="about-info-label">项目仓库</div>
+        <div class="about-info-content">
+          <a class="about-info-content-link" href="https://github.com/RuixeWolf/vue-data-encryption">GitHub</a> |
+          <a class="about-info-content-link" href="https://gitee.com/RuixeWolf/vue-data-encryption">Gitee</a>
+        </div>
+      </div>
     </div>
 
     <div class="about">
       <div class="about-title">开发者信息</div>
       <div class="about-info">
         <div class="about-info-label">开发者</div>
-        <div class="about-info-content">Ruixe | Jihao Li</div>
+        <div class="about-info-content">RuixeWolf | Jihao Li</div>
       </div>
       <div class="about-info">
         <div class="about-info-label">联系方式</div>
@@ -158,6 +172,16 @@ export default defineComponent({
 
       &:last-child {
         margin-bottom: 0;
+      }
+
+      &-link,
+      &-link:active {
+        color: #409EFF;
+        text-decoration: none;
+      }
+
+      &-link:hover {
+        text-decoration: underline;
       }
     }
   }
