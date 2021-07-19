@@ -6,7 +6,7 @@ import vueRouter from '@/router'
 // 创建 Axios 实例
 const service = axios.create({
   baseURL: process.env.VUE_APP_BASE_API,
-  timeout: 5000
+  timeout: 60 * 1000
 })
 
 // 请求拦截器
