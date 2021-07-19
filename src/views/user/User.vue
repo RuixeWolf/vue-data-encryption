@@ -135,13 +135,25 @@ export default defineComponent({
      * 处理用户退出登录事件
      */
     async handleLogout () {
+      // 显示退出登录提示
+      const logoutMsg = ElMessage({
+        message: '正在退出登录',
+        type: 'info',
+        duration: 0
+      })
+
       try {
         const logoutRes = await this.userLogout()
+        // 退出登录成功
         ElMessage.success(logoutRes)
         this.redirectTo({ name: 'userLogin' })
       } catch (error) {
+        // 退出登录失败
         ElMessage.error(error.message)
       }
+
+      // 关闭退出登录提示
+      logoutMsg.close()
     },
 
     /**
@@ -169,12 +181,21 @@ export default defineComponent({
      * @param {string} password - 用户账号密码
      */
     async handleAccountCancellation (password) {
+      // 显示账号注销提示
+      const accountCancellationMsg = ElMessage({
+        message: '正在注销账号',
+        type: 'info',
+        duration: 0
+      })
+
       // 加密密码
       try {
         password = await rsaEncrypt(password)
       } catch (error) {
         // 加密失败
         ElMessage.error(error.message)
+        // 关闭账号注销提示
+        accountCancellationMsg.close()
         return
       }
 
@@ -188,6 +209,8 @@ export default defineComponent({
       } catch (error) {
         // 请求失败
         ElMessage.error(error.message)
+        // 关闭账号注销提示
+        accountCancellationMsg.close()
         return
       }
 
@@ -201,6 +224,9 @@ export default defineComponent({
         // 账号注销失败
         ElMessage.error(cancellationRes.message || '账号注销失败')
       }
+
+      // 关闭账号注销提示
+      accountCancellationMsg.close()
     },
 
     /**
