@@ -35,7 +35,7 @@ export function getStorageItem (key) {
     // Return string data
     return dataStr
   }
-  return dataObj.value
+  return dataObj.value || dataObj
 }
 
 /**
@@ -90,7 +90,7 @@ export function getSessionItem (key) {
     // Return string data
     return dataStr
   }
-  return dataObj.value
+  return dataObj.value || dataObj
 }
 
 /**
