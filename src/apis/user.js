@@ -9,7 +9,7 @@ import request from '@/utils/request'
 export function register (registerData) {
   return request({
     method: 'POST',
-    url: '/user/register',
+    url: '/v1/user/register',
     data: registerData
   })
 }
@@ -23,7 +23,7 @@ export function register (registerData) {
 export function login (loginData) {
   return request({
     method: 'POST',
-    url: '/user/login',
+    url: '/v1/user/login',
     data: loginData
   })
 }
@@ -35,7 +35,7 @@ export function login (loginData) {
 export function logout () {
   return request({
     method: 'GET',
-    url: '/user/logout'
+    url: '/v1/user/logout'
   })
 }
 
@@ -46,7 +46,7 @@ export function logout () {
 export function getInfo () {
   return request({
     method: 'GET',
-    url: '/user/info'
+    url: '/v1/user/info'
   })
 }
 
@@ -59,7 +59,7 @@ export function getInfo () {
 export function editInfo (userInfo) {
   return request({
     method: 'POST',
-    url: '/user/info',
+    url: '/v1/user/info',
     data: userInfo
   })
 }
@@ -73,7 +73,7 @@ export function editInfo (userInfo) {
 export function modifyPassword (passwordData) {
   return request({
     method: 'POST',
-    url: '/user/modifypassword',
+    url: '/v1/user/modifypassword',
     data: passwordData
   })
 }
@@ -87,7 +87,7 @@ export function modifyPassword (passwordData) {
 export function accountCancellation (cancellationData) {
   return request({
     method: 'POST',
-    url: '/user/cancellation',
+    url: '/v1/user/cancellation',
     data: cancellationData
   })
 }

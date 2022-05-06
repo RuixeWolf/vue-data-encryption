@@ -7,6 +7,6 @@ import request from '@/utils/request'
 export function getPubKey () {
   return request({
     method: 'GET',
-    url: '/key/pubkey'
+    url: '/v1/key/pubkey'
   })
 }
