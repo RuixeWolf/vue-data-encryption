@@ -45,11 +45,11 @@ const routes = [
 
       /**
        * 编辑用户信息页面
-       * Path: /user/editinfo
+       * Path: /user/edit-info
        * @access private
        */
       {
-        path: 'editinfo',
+        path: 'edit-info',
         name: 'editUserInfo',
         component: () => import('@/views/user/views/EditUserInfo.vue'),
         meta: {
@@ -59,11 +59,11 @@ const routes = [
 
       /**
        * 修改密码页面
-       * Path: /user/modifypassword
+       * Path: /user/modify-password
        * @access private
        */
       {
-        path: 'modifypassword',
+        path: 'modify-password',
         name: 'modifyUserPassword',
         component: () => import('@/views/user/views/ModifyUserPassword.vue'),
         meta: {

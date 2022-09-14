@@ -6,8 +6,8 @@
       <nav class="nav-pc">
         <el-menu :default-active="currentPath" mode="horizontal" router active-text-color="#409EFF">
           <el-menu-item index="/user/info">用户信息</el-menu-item>
-          <el-menu-item index="/user/editinfo">编辑用户信息</el-menu-item>
-          <el-menu-item index="/user/modifypassword">修改密码</el-menu-item>
+          <el-menu-item index="/user/edit-info">编辑用户信息</el-menu-item>
+          <el-menu-item index="/user/modify-password">修改密码</el-menu-item>
           <el-menu-item index="/user/about">关于</el-menu-item>
           <!-- popper class 不能存在于使用 scoped 的 style 标签中 -->
           <el-submenu index="more" popper-class="menu-more">
@@ -41,8 +41,8 @@
               active-text-color="#409EFF"
               @select="switchDrawerNav(false)">
               <el-menu-item index="/user/info">用户信息</el-menu-item>
-              <el-menu-item index="/user/editinfo">编辑用户信息</el-menu-item>
-              <el-menu-item index="/user/modifypassword">修改密码</el-menu-item>
+              <el-menu-item index="/user/edit-info">编辑用户信息</el-menu-item>
+              <el-menu-item index="/user/modify-password">修改密码</el-menu-item>
               <el-menu-item index="/user/about">关于</el-menu-item>
               <el-submenu index="more">
                 <template #title>更多</template>
