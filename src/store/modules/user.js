@@ -27,6 +27,7 @@ const userModule = {
         // 已登出
         removeStorageItem('authToken')
         removeStorageItem('logged')
+        removeStorageItem('clientAesKey')
       }
       state.logged = loginStatus
     }

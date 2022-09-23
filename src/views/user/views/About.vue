@@ -14,7 +14,10 @@
       </div>
       <div class="about-info">
         <div class="about-info-label">主要功能</div>
-        <div class="about-info-content">非对称加密传输时的重点数据（如：密码）</div>
+        <div class="about-info-content">非对称加解密传输时的重点数据（如：客户端对称加密的密钥）</div>
+        <div class="about-info-content">对称加解密传输时的一般重点数据（如：用户密码），相较于非对称加密处理速度更快</div>
+        <div class="about-info-content">传输时加密的字段包含时间戳信息，服务端校验时间戳用于防止中间人攻击时保存密文伪造请求</div>
+        <div class="about-info-content">重点的 API（如：用户登录、修改用户信息）使用数字签名对请求数据进行校验</div>
         <div class="about-info-content">单向加密储存时的重点数据</div>
         <div class="about-info-content">使用 Token 验证客户端的会话状态</div>
         <div class="about-info-content">Token 有时限，客户端访问时自动续约</div>

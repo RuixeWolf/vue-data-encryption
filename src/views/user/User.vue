@@ -65,7 +65,7 @@ import { defineComponent } from 'vue'
 import { mapState, mapActions, mapMutations } from 'vuex'
 import { ElMessageBox, ElMessage } from 'element-plus'
 import routerAssist from '@/mixins/routerAssist'
-import { rsaEncrypt } from '@/utils/rsaEncrypt'
+import { aesEncryptWithTimestamp } from '@/utils/aes'
 import { accountCancellation } from '@/apis/user'
 
 export default defineComponent({
@@ -190,7 +190,7 @@ export default defineComponent({
 
       // 加密密码
       try {
-        password = await rsaEncrypt(password)
+        password = aesEncryptWithTimestamp(password)
       } catch (error) {
         // 加密失败
         ElMessage.error(error.message)

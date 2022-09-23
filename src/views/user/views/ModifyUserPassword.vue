@@ -25,7 +25,7 @@ import { mapMutations } from 'vuex'
 import { ElMessageBox, ElMessage } from 'element-plus'
 import validateForm from '@/mixins/validateForm'
 import routerAssist from '@/mixins/routerAssist'
-import { rsaEncrypt } from '@/utils/rsaEncrypt'
+import { aesEncryptWithTimestamp } from '@/utils/aes'
 import { modifyPassword } from '@/apis/user'
 
 export default defineComponent({
@@ -105,8 +105,8 @@ export default defineComponent({
 
       // 加密密码
       try {
-        oldPassword = await rsaEncrypt(oldPassword)
-        newPassword = await rsaEncrypt(newPassword)
+        oldPassword = aesEncryptWithTimestamp(oldPassword)
+        newPassword = aesEncryptWithTimestamp(newPassword)
       } catch (error) {
         ElMessage.error(error.message)
         this.submitting = false

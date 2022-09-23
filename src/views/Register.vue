@@ -27,7 +27,7 @@
               <el-button class="form-btn" type="info" plain @click="navigateTo({ name: 'userLogin' })">登录</el-button>
             </el-col>
             <el-col :span="12">
-              <el-button class="form-btn" type="primary" plain :loading="registering" @click="hanndleRegister()">注册</el-button>
+              <el-button class="form-btn" type="primary" plain :loading="registering" @click="handleRegister()">注册</el-button>
             </el-col>
           </el-row>
         </el-form-item>
@@ -42,8 +42,12 @@ import { mapActions } from 'vuex'
 import { ElMessage } from 'element-plus'
 import routerAssist from '@/mixins/routerAssist'
 import validateForm from '@/mixins/validateForm'
-import { rsaEncrypt } from '@/utils/rsaEncrypt'
+import { rsaEncryptWithTimestamp } from '@/utils/rsa'
 import { register as userRegister } from '@/apis/user'
+import {
+  aesEncryptWithTimestamp,
+  getClientAesKey
+} from '@/utils/aes'
 
 export default defineComponent({
   name: 'Register',
@@ -125,7 +129,7 @@ export default defineComponent({
     /**
      * 处理注册事件
      */
-    async hanndleRegister () {
+    async handleRegister () {
       this.registering = true
 
       // 验证表单数据
@@ -147,11 +151,21 @@ export default defineComponent({
 
       // 加密密码
       try {
-        registerData.password = await rsaEncrypt(registerData.password)
+        registerData.password = aesEncryptWithTimestamp(registerData.password)
       } catch (error) {
         // 加密失败
         ElMessage.error(error.message)
-        this.registering = false
+        this.loginNow = false
+        return
+      }
+
+      // 设置客户端 AES 密钥（从本地获取或生成 AES 密钥，并使用 RSA 加密）
+      try {
+        registerData.clientAesKey = await rsaEncryptWithTimestamp(getClientAesKey())
+      } catch (error) {
+        // 加密失败
+        ElMessage.error(error.message)
+        this.loginNow = false
         return
       }
 

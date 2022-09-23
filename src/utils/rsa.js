@@ -34,3 +34,19 @@ export async function rsaEncrypt (str) {
   }
   return encryptRes
 }
+
+/**
+ * 包含时间戳的 RSA 加密方法
+ * @description 将数据与时间戳一起加密，防止中间人攻击时保存密文伪造请求。
+ * 默认的加密原文格式：[数据]@#@#@[时间戳]
+ * @param {string} originalData - 要加密的数据
+ * @param {string} [delimiter = '@#@#@'] - 数据与时间戳的分隔符
+ * @returns {Promise<string>} 加密结果（Base64 编码）
+ */
+export function rsaEncryptWithTimestamp (
+  originalData,
+  delimiter = '@#@#@'
+) {
+  const timestamp = Date.now().toString()
+  return rsaEncrypt(originalData + delimiter + timestamp)
+}
