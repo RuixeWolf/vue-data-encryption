@@ -79,6 +79,7 @@
         <div class="about-info-content">Element-Plus —— 页面 UI</div>
         <div class="about-info-content">Axios —— XHR 前后端数据交互</div>
         <div class="about-info-content">JSEncrypt —— 传输时重点数据加密</div>
+        <div class="about-info-content">Crypto-JS —— 传输时数据加密与数字签名</div>
       </div>
       <div class="about-info">
         <div class="about-info-label">项目仓库</div>
