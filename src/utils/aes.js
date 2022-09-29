@@ -44,16 +44,16 @@ export function aesEncryptWithTimestamp (originalData, delimiter = '@#@#@') {
 /**
  * 通过 Record 获取 AES 签名
  * @description 签名算法：将请求数据 key 按照 a-z 排序，
- * 拼接所有数据字段为一个字符串，对字符串进行 SHA256 摘要，
+ * 将 Record 转为 JSON 字符串，对字符串进行 SHA256 摘要，
  * 使用 AES 加密 SHA256 摘要
  * @param {Record<string, unknown>} data - 需要签名的数据
  * @returns {string} 数据签名
  */
 export function getAesSignatureByRecord (data) {
-  let dataStr = ''
+  const record = {}
   Object.keys(data).sort().forEach(key => {
-    dataStr += data[key]
+    record[key] = data[key]
   })
-  const hashStr = SHA256(dataStr).toString(encHex)
+  const hashStr = SHA256(JSON.stringify(record)).toString(encHex)
   return AES.encrypt(hashStr, getClientAesKey()).toString()
 }
