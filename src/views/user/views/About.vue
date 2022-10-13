@@ -99,7 +99,7 @@
       <div class="about-info">
         <div class="about-info-label">联系方式</div>
         <div class="about-info-content">手机 —— 18616871724 | 18139616598</div>
-        <div class="about-info-content">邮箱 —— Ruixe1569898391@outlook.com | 3207456815@qq.com</div>
+        <div class="about-info-content">邮箱 —— RuixeWolf@outlook.com | 3207456815@qq.com</div>
       </div>
     </div>
 
